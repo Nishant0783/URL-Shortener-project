@@ -11,10 +11,11 @@ import {
 } from "./ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import { LinkIcon, LogOut } from 'lucide-react'
+import { UrlState } from '@/context'
 
 const Header = () => {
     const navigate = useNavigate();
-    const user = false;
+    const { user, fetchUser } = UrlState();
     return (
         <nav className='py-4 flex justify-between items-center'>
             <Link to='/'>
@@ -26,12 +27,12 @@ const Header = () => {
                     : <DropdownMenu>
                         <DropdownMenuTrigger className='w-10 rounded-full overflow-hidden'>
                             <Avatar>
-                                <AvatarImage src="https://github.com/shadcn.png" />
+                                <AvatarImage src={user?.user_metaData?.profile_pic} />
                                 <AvatarFallback>CN</AvatarFallback>
                             </Avatar>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
-                            <DropdownMenuLabel>Nishant</DropdownMenuLabel>
+                            <DropdownMenuLabel>{user?.user_metaData?.name}</DropdownMenuLabel>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem> 
                             <LinkIcon className='mr-2 h-4 w-4' />
