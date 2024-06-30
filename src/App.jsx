@@ -1,26 +1,30 @@
-import React from 'react'
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import AppLayout from './layouts/app_layout'
-import LandingPage from './pages/LandingPage'
-import Dashboard from './pages/Dashboard'
-import Auth from './pages/Auth'
-import Link from './pages/Link'
-import RedirectLink from './pages/RedirectLink'
-import UrlProvider from './context'
-import RequireAuth from './components/RequireAuth'
+import "./App.css";
+import {RouterProvider, createBrowserRouter} from "react-router-dom";
+import UrlProvider from "./context";
 
+import AppLayout from "./layouts/app_layout";
+import RequireAuth from "./components/RequireAuth";
 
+import RedirectLink from "./pages/RedirectLink";
+import LandingPage from "./pages/LandingPage";
+import Dashboard from "./pages/Dashboard";
+import Link from "./pages/Link";
+import Auth from "./pages/Auth";
 
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
     children: [
       {
-        path: '/',
-        element: <LandingPage />
+        path: "/",
+        element: <LandingPage />,
       },
       {
-        path: '/dashboard',
+        path: "/auth",
+        element: <Auth />,
+      },
+      {
+        path: "/dashboard",
         element: (
           <RequireAuth>
             <Dashboard />
@@ -28,11 +32,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/auth',
-        element: <Auth />
-      },
-      {
-        path: '/link/:id',
+        path: "/link/:id",
         element: (
           <RequireAuth>
             <Link />
@@ -40,18 +40,19 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/:id',
-        element: <RedirectLink />
+        path: "/:id",
+        element: <RedirectLink />,
       },
-    ]
-  }
-])
-const App = () => {
+    ],
+  },
+]);
+
+function App() {
   return (
     <UrlProvider>
       <RouterProvider router={router} />
     </UrlProvider>
-  )
+  );
 }
 
-export default App
+export default App;

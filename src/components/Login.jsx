@@ -12,10 +12,10 @@ import {useNavigate, useSearchParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import * as Yup from "yup";
 import Error from "./Error";
-import {login} from "../db/apiAuth";
+import {login} from "@/db/apiAuth";
 import {BeatLoader} from "react-spinners";
-import useFetch from "../hooks/useFetch";
-import {UrlState} from "../context";
+import useFetch from "@/hooks/useFetch";
+import {UrlState} from "@/context";
 
 const Login = () => {
   let [searchParams] = useSearchParams();
@@ -48,8 +48,7 @@ const Login = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error, data]);
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+  const handleLogin = async () => {
     setErrors([]);
     try {
       const schema = Yup.object().shape({
@@ -104,7 +103,7 @@ const Login = () => {
         {errors.password && <Error message={errors.password} />}
       </CardContent>
       <CardFooter>
-        <Button onClick={handleLogin} type="submit">
+        <Button onClick={handleLogin}>
           {loading ? <BeatLoader size={10} color="#36d7b7" /> : "Login"}
         </Button>
       </CardFooter>
