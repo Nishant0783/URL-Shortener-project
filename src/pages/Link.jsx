@@ -50,7 +50,7 @@ const Link = () => {
 
   const downloadImage = () => {
     const imageUrl = url?.qr;
-    const fileName = url?.title;
+    const fileName = `${url?.title}.png`;
 
     // Create an anchor element
     const anchor = document.createElement("a");
@@ -58,13 +58,13 @@ const Link = () => {
     anchor.download = fileName;
 
     // Append the anchor to the body
-    document.body.appendChild(anchor);
+    // document.body.appendChild(anchor);
 
     // Trigger the download by simulating a click event
     anchor.click();
 
     // Remove the anchor from the document
-    document.body.removeChild(anchor);
+    // document.body.removeChild(anchor);
   };
 
   return (

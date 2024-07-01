@@ -1,4 +1,3 @@
-import { UAParser } from "ua-parser-js";
 import supabase, { supabaseUrl } from "./supabase";
 
 export async function getUrls(user_id) {
@@ -37,7 +36,7 @@ export async function createUrl({ title, longUrl, customUrl, user_id }, qrcode) 
 
     if (storageError) throw new Error(storageError.message);
 
-    const qr = `${supabaseUrl}/storage/v1/object/qrs/${fileName}`;
+    const qr = `${supabaseUrl}/storage/v1/object/public/qrs/${fileName}`;
 
     const { data, error } = await supabase.from("urls").insert([
         {

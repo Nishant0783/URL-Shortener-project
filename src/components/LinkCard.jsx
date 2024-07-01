@@ -9,6 +9,7 @@ const BASE_URL = import.meta.env.VITE_BASE_URL
 
 const LinkCard = ({ url, fetchUrls }) => {
     const downloadImage = () => {
+        console.log("Download button clicked")
         const imageUrl = url?.qr;
         const fileName = url?.title;
         const anchor = document.createElement("a");
@@ -47,12 +48,12 @@ const LinkCard = ({ url, fetchUrls }) => {
                 <Button
                     variant="ghost"
                     onClick={() =>
-                        navigator.clipboard.writeText(`https://trimrr.in/${url?.short_url}`)
+                        navigator.clipboard.writeText(`${import.meta.env.VITE_BASE_URL}${url?.short_url}`)
                     }
                 >
                     <Copy />
                 </Button>
-                <Button variant="ghost">
+                <Button variant="ghost" onClick={downloadImage}>
                     <Download />
                 </Button>
                 <Button

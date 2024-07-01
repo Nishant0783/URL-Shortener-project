@@ -35,7 +35,7 @@ export const storeClicks = async ({ id, originalUrl }) => {
         const device = res.type || "desktop";
 
         const response = await fetch("https://ipapi.co/json");
-        // console.log("Resposne is: ", response.json())
+
         const { city, country_name: country } = await response.json();
 
         const {data, error} = await supabase.from("clicks").insert({
@@ -45,15 +45,6 @@ export const storeClicks = async ({ id, originalUrl }) => {
             device: device,
         },
     );
-
-        if(data) {
-            console.log("Data is: ", data)
-        }
-
-        if(error) {
-            console.log("Error is: ", error)
-        }
-
         window.location.href = originalUrl;
     } catch (error) {
         console.error("Error recording click:", error);
